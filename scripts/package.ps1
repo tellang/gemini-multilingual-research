@@ -7,9 +7,8 @@ $ErrorActionPreference = "Stop"
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $extensionRoot = Resolve-Path (Join-Path $scriptDir "..")
-$repoRoot = Resolve-Path (Join-Path $extensionRoot "..")
 $stageRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("gemini-multilingual-research-" + [guid]::NewGuid().ToString("N"))
-$outRoot = Join-Path $repoRoot $OutDir
+$outRoot = Join-Path $extensionRoot $OutDir
 $zipName = "gemini-multilingual-research-$Version.zip"
 $zipPath = Join-Path $outRoot $zipName
 

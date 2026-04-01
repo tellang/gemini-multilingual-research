@@ -1,6 +1,6 @@
 {
   "name": "gemini-multilingual-research",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gemini-native multilingual parallel research workflow with commands, skills, and subagents for cross-language discovery and reporting.",
   "contextFileName": "GEMINI.md",
   "excludeTools": ["run_shell_command(rm -rf *)"],
