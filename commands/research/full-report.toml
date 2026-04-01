@@ -1,0 +1,24 @@
+description = "Produce a structured multilingual research report with cross-language findings, citations, and implementation implications."
+
+prompt = """
+Activate the bundled `multilingual-parallel-research` skill if relevant.
+Use the bundled subagents when useful:
+- `source_collector`
+- `cross_language_comparer`
+- `report_writer`
+
+Create a full multilingual research report for:
+
+{{args}}
+
+Required sections:
+1. Executive summary
+2. Search coverage by language / country
+3. Key findings by region
+4. Cross-language terminology and concept mapping
+5. Implementation implications
+6. Risks, gaps, and confidence notes
+7. Source list with citations
+
+Favor verified, current information and clearly distinguish findings from inferences.
+"""

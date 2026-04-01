@@ -1,0 +1,19 @@
+description = "Run a fast multilingual scan across multiple countries/languages and return a concise, cited summary."
+
+prompt = """
+Activate the bundled `multilingual-parallel-research` skill if relevant.
+
+The user wants a quick multilingual technical research scan for:
+
+{{args}}
+
+Instructions:
+1. Cover English and non-English sources where relevant.
+2. Prefer current, citable information.
+3. Keep the answer concise but structured.
+4. Include:
+   - summary
+   - top sources
+   - country/language-specific findings
+   - notable gaps / uncertainty
+"""

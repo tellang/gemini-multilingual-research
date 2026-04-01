@@ -1,0 +1,26 @@
+name: Release Gemini Multilingual Research Extension
+
+on:
+  push:
+    tags:
+      - 'gemini-multilingual-research-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Package extension archive
+        shell: pwsh
+        run: .\gemini-multilingual-research\scripts\package.ps1 -Version "${{ github.ref_name }}"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/gemini-multilingual-research-${{ github.ref_name }}.zip

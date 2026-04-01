@@ -1,0 +1,16 @@
+description = "Compare two domains or approaches across multiple languages and markets."
+
+prompt = """
+Activate the bundled `multilingual-parallel-research` skill if relevant.
+
+Compare the following domains or approaches across multiple languages / countries:
+
+{{args}}
+
+Required output:
+1. Comparison table
+2. Regional differences
+3. Terminology mapping by language
+4. Strongest sources
+5. Practical recommendation
+"""
