@@ -20,7 +20,7 @@ gemini extensions install /path/to/gemini-multilingual-research
 ### From GitHub
 
 ```bash
-gemini extensions install https://github.com/tellang/gemini-multilingual-research --ref gemini-multilingual-research-v0.1.1
+gemini extensions install https://github.com/tellang/gemini-multilingual-research --ref gemini-multilingual-research-v0.1.2
 ```
 
 If installing from a GitHub Release archive, use the tagged release shipped for this extension.
@@ -43,7 +43,7 @@ gemini extensions validate .
 From the extension project root on Windows PowerShell:
 
 ```powershell
-.\scripts\package.ps1 -Version 0.1.1
+.\scripts\package.ps1 -Version 0.1.2
 ```
 
 The script produces a self-contained zip archive in `release/` with `gemini-extension.json` at the archive root.

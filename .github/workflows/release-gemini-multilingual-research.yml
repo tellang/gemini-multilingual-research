@@ -13,14 +13,40 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Validate release tag format
+        shell: pwsh
+        run: |
+          if ("${{ github.ref_name }}" -notmatch '^gemini-multilingual-research-v[0-9]+\.[0-9]+\.[0-9]+$') {
+            throw "Unexpected tag format: ${{ github.ref_name }}"
+          }
+
+      - name: Validate extension
+        shell: pwsh
+        run: |
+          & "${env:APPDATA}\npm\gemini.cmd" extensions validate .
 
       - name: Package extension archive
         shell: pwsh
-        run: .\gemini-multilingual-research\scripts\package.ps1 -Version "${{ github.ref_name }}"
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^gemini-multilingual-research-v', ''
+          "EXT_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          .\scripts\package.ps1 -Version $version
+
+      - name: Verify archive manifest
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $version = "${{ github.ref_name }}" -replace '^gemini-multilingual-research-v', ''
+          $zip = Resolve-Path ".\release\gemini-multilingual-research-$version.zip"
+          $entries = [System.IO.Compression.ZipFile]::OpenRead($zip).Entries | Select-Object -ExpandProperty FullName
+          if ($entries -notcontains 'gemini-extension.json') {
+            throw 'gemini-extension.json not found at archive root'
+          }
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836
         with:
           files: |
-            gemini-multilingual-research/release/gemini-multilingual-research-${{ github.ref_name }}.zip
+            release/gemini-multilingual-research-${{ env.EXT_VERSION }}.zip

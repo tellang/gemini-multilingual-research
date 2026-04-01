@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "0.1.0",
+  [string]$Version = "0.1.2",
   [string]$OutDir = "release"
 )
 
@@ -9,6 +9,11 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $extensionRoot = Resolve-Path (Join-Path $scriptDir "..")
 $stageRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("gemini-multilingual-research-" + [guid]::NewGuid().ToString("N"))
 $outRoot = Join-Path $extensionRoot $OutDir
+
+if ($Version -notmatch '^[A-Za-z0-9._-]+$') {
+  throw "Version must match ^[A-Za-z0-9._-]+$"
+}
+
 $zipName = "gemini-multilingual-research-$Version.zip"
 $zipPath = Join-Path $outRoot $zipName
 
